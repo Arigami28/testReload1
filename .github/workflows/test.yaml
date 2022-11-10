@@ -1,0 +1,14 @@
+name: Encode Base64 string
+on:
+  push:
+    branches: [ main ]
+jobs:
+  decode-secret:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Retrieve the secret and decode it to a file
+        env:
+          STRING_BASE64: VEVTVF9ERVBMT1k=
+        run: |
+          echo $STRING_BASE64 | base64 --decode
