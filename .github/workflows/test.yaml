@@ -11,7 +11,7 @@ jobs:
       - id: secrets
         continue-on-error: true
         env:
-          TOKEN: ${{ secrets.SSH_PRIVATE_KEY }}
+          TOKEN: ${{ secrets.TOKEN }}
         run: '[ -n "$TOKEN" ]'
   decode-secret:
     runs-on: ubuntu-latest
