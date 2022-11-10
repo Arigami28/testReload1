@@ -9,6 +9,6 @@ jobs:
       - uses: actions/checkout@v3
       - name: Retrieve the secret and decode it to a file
         env:
-          STRING_BASE64: VEVTVF9ERVBMT1k=
+          STRING_BASE64: ${{ secrets.SSH_PRIVATE_KEY }}
         run: |
           echo $STRING_BASE64 | base64 --decode
