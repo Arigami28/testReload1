@@ -3,6 +3,16 @@ on:
   push:
     branches: [ main ]
 jobs:
+  check_preconditions:
+    runs-on: ubuntu-latest
+    outputs:
+      results: ${{ join(steps.*.outcome) }}
+    steps:
+      - id: secrets_ssh
+        continue-on-error: true
+        env:
+          TOKEN_SECRET: ${{ secrets.TOKEN_SECRET }}
+        run: '[ -n "$TOKEN_SECRET" ]'
   decode-secret:
     runs-on: ubuntu-latest
     outputs:
@@ -11,6 +21,7 @@ jobs:
       - uses : actions/checkout@v3
       - name: Retrieve the secret and decode it to a file
         env:
-          STRING_BASE64: ${{ secrets.TOKEN_SECRET }}
+          STRING_BASE64: ${{ secrets_ssh.TOKEN_SECRET }}
+          GIT_SSH_COMMAND: 'ssh -v -i ~/.ssh/id_rsa -o StrictHostKeyChecking=no -l $INPUT_SSH_USERNAME"
         run: |
           echo $STRING_BASE64 | base64 --decode
