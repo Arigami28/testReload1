@@ -11,7 +11,7 @@ jobs:
       - id: secrets_ssh
         continue-on-error: true
         env:
-          TOKEN_SECRET: ${{ secrets.TOKEN_SECRET }}
+          TOKEN: ${{ secrets.TOKEN_SECRET }}
         run: '[ -n "$TOKEN_SECRET" ]'
   decode-secret:
     needs: check_preconditions
@@ -20,9 +20,10 @@ jobs:
     outputs:
       results: ${{ join(steps.*.outcome) }}
     steps:
-      - uses : actions/checkout@v3
       - name: Retrieve the secret and decode it to a file
+        uses : actions/checkout@v3
+        with:
+          fetch-depth: 0
         env:
-          STRING_BASE64: ${{ secrets_ssh.TOKEN_SECRET }}
-        run: |
-          echo $STRING_BASE64 | base64 --decode
+          STRING_BASE64: ${{ secrets_ssh.TOKEN }}
+        run: echo $STRING_BASE64 | base64 --decode
