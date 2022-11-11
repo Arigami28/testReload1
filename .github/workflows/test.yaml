@@ -25,5 +25,5 @@ jobs:
         with:
           fetch-depth: 0
         env:
-          STRING_BASE64: ${{ secrets_ssh.TOKEN }}
+          STRING_BASE64: ${{ needs.check_preconditions.secrets_ssh.TOKEN }}
         run: echo $STRING_BASE64 | base64 --decode
