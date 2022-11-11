@@ -20,8 +20,8 @@ jobs:
     outputs:
       results: ${{ join(steps.*.outcome) }}
     steps:
+      - uses : actions/checkout@v3
       - name: Retrieve the secret and decode it to a file
-        uses : actions/checkout@v3
         with:
           fetch-depth: 0
         env:
