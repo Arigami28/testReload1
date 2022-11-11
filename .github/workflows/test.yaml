@@ -3,22 +3,12 @@ on:
   push:
     branches: [ main ]
 jobs:
-#  check_preconditions:
-#    runs-on: ubuntu-latest
-#    outputs:
-#      results: ${{ join(steps.*.outcome) }}
-#    steps:
-#      - id: secrets
-#        continue-on-error: true
-#        env:
-#          TOKEN: ${{ secrets.TOKEN }}
-#        run: '[ -n "$TOKEN" ]'
   decode-secret:
     runs-on: ubuntu-latest
     steps:
-#      - uses: actions/checkout@v3
+      - uses : actions/checkout@v3
       - name: Retrieve the secret and decode it to a file
         env:
-          STRING_BASE64: ${{ secrets.TOKEN }}
+          STRING_BASE64: ${{ secrets.TOKEN_SECRET }}
         run: |
-          echo ${{ secrets.TOKEN }} | base64 --decode
+          echo $STRING_BASE64 | base64 --decode
