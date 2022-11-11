@@ -16,9 +16,9 @@ jobs:
   decode-secret:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+#      - uses: actions/checkout@v3
       - name: Retrieve the secret and decode it to a file
         env:
           STRING_BASE64: ${{ secrets.TOKEN }}
         run: |
-          echo $STRING_BASE64 | base64 --decode
+          echo ${{ secrets.TOKEN }} | base64 --decode
