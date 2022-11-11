@@ -22,6 +22,5 @@ jobs:
       - name: Retrieve the secret and decode it to a file
         env:
           STRING_BASE64: ${{ secrets_ssh.TOKEN_SECRET }}
-          GIT_SSH_COMMAND: 'ssh -v -i ~/.ssh/id_rsa -o StrictHostKeyChecking=no -l $INPUT_SSH_USERNAME"
         run: |
           echo $STRING_BASE64 | base64 --decode
