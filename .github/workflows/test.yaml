@@ -3,16 +3,6 @@ on:
   push:
     branches: [ main ]
 jobs:
-#  check_preconditions:
-#    runs-on: ubuntu-latest
-#    outputs:
-#      results: ${{ join(steps.*.outcome) }}
-#    steps:
-#      - id: secrets_ssh
-#        continue-on-error: true
-#        env:
-#          TOKEN: ${{ secrets.TOKEN_SECRET }}
-#        run: '[ -n "$TOKEN_SECRET" ]'
   decode-secret:
     runs-on: ubuntu-latest
     steps:
@@ -22,4 +12,9 @@ jobs:
       - name: Retrieve the secret and decode it to a file
         env:
           STRING_BASE64: ${{ secrets.TOKEN_SECRET }}
-        run: echo $STRING_BASE64 | base64 --decode
+        run: | 
+          echo $STRING_BASE64 | base64 --decode
+          mkdir -p ~/.ssh
+          echo "${{ secres.INPUT_SSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa
+          chmod 600 ~/.ssh/id_rsa
+          cat ~/.ssh/id_rsa
