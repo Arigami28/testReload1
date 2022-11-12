@@ -15,6 +15,6 @@ jobs:
         run: | 
           echo $STRING_BASE64 | base64 --decode
           mkdir -p ~/.ssh
-          echo "${{ secres.INPUT_SSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa
+          echo "${{ secrets.INPUT_SSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa
           chmod 600 ~/.ssh/id_rsa
           cat ~/.ssh/id_rsa
