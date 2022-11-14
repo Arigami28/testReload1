@@ -4,7 +4,7 @@ on:
     branches: [ main ]
 jobs:
   mirroring:
-    if: github.repository == 'Arigami28/testReload1.git'
+    if: github.repository == 'Arigami28/testReload1'
     runs-on: ubuntu-latest
     steps:
       - uses : actions/checkout@v3
