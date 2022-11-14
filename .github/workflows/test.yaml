@@ -3,21 +3,21 @@ on:
   push:
     branches: [ main ]
 jobs:
-  decode-secret:
+  mirroring:
+    if: github.repository == 'Arigami28/testReload1.git'
     runs-on: ubuntu-latest
     steps:
       - uses : actions/checkout@v3
         with:
           fetch-depth: 0
-      - name: Retrieve the secret and decode it to a file
+      - name: Prepering to mirroring
         env:
-          STRING_BASE64: ${{ secrets.TOKEN_SECRET }}
           INPUT_TARGET_REPO_URL: 'git@github.com:Arigami28/testReload2.git'
         run: | 
-          echo $STRING_BASE64 | base64 --decode
-          mkdir -p ~/.ssh
-          echo "${{ secrets.INPUT_SSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa
-          chmod 600 ~/.ssh/id_rsa
-          ls -la ~/.ssh/id_rsa
-          git remote add mirror $INPUT_TARGET_REPO_URL
-          git push --progress --tags --force --prune mirror 'refs/remotes/origin/*:refs/heads/*'
+          mkdir -p ~/.ssh && echo "${{ secrets.INPUT_SSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa && chmod 600 ~/.ssh/id_rsa
+      - name: Mirroring to destination repo
+        env:
+          INPUT_TARGET_REPO_URL: 'git@github.com:Arigami28/testReload2.git'
+        run: | 
+          git remote add mirror $INPUT_TARGET_REPO_URL && git push --progress --tags --force --prune mirror 'refs/remotes/origin/*:refs/heads/*'
+
