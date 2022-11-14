@@ -1,4 +1,4 @@
-name: Encode Base64 string
+name: Mirroing repo
 on:
   push:
     branches: [ main ]
