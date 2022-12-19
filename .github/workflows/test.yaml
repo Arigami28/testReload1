@@ -9,7 +9,8 @@ jobs:
     steps:
       - uses : actions/checkout@v3
         with:
-          fetch-depth: 1
+          fetch-depth: 2
+      - run: git checkout HEAD^
       - name: Prepering to mirroring
         env:
           INPUT_TARGET_REPO_URL: 'git@github.com:Arigami28/testReload2.git'
@@ -19,5 +20,4 @@ jobs:
         env:
           INPUT_TARGET_REPO_URL: 'git@github.com:Arigami28/testReload2.git'
         run: | 
-          git clone --depth 1 --no-single-branch git@github.com:Arigami28/testReload1.git && cd testReload1
           git remote add mirror $INPUT_TARGET_REPO_URL && git push --progress --tags --force --prune mirror 'refs/remotes/origin/*:refs/heads/*'
