@@ -1,7 +1,6 @@
 name: Mirroing repo
 on:
-  push:
-    branches: [ main ]
+  push
 jobs:
   mirroring:
     if: github.repository == 'Arigami28/testReload1'
