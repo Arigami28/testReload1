@@ -1,7 +1,6 @@
 name: Mirroing repo
 on:
-  push:
-    branches: [ main ]
+  push
 jobs:
   mirroring:
     if: github.repository == 'Arigami28/testReload1'
@@ -16,4 +15,4 @@ jobs:
           INPUT_TARGET_REPO_URL:  'git@github.com:Arigami28/testReload2.git'
         run: |
           git clone --bare $SOURCE_TARGET_REPO_URL && cd testReload1.git
-          git push --progress --prune --mirror $INPUT_TARGET_REPO_URL
+          git push --dry-run --progress --prune --mirror $INPUT_TARGET_REPO_URL
