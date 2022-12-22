@@ -23,4 +23,3 @@ jobs:
         run: | 
           git remote add mirror $TARGET_REPO_URL && git push --progress --tags --force --prune mirror '+refs/remotes/origin/*:refs/heads/*'
 
-
