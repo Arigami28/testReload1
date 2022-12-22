@@ -1,16 +1,17 @@
 name: Mirroring repo
 on:
-  push:
-    branches:
-      - main
+  push
+concurrency:
+  group: ${{ github.ref }}
 jobs:
   mirroring:
-    if: github.repository == 'multicharts/study_repo_data'
+    if: github.repository == 'Arigami28/testReload1.git'
     runs-on: ubuntu-latest
     steps:
       - uses : actions/checkout@v3
         with:
           fetch-depth: 0
+          lfs: true
           ref:  ${{ github.event.pull_request.head.sha }}
       - name: Preparing to mirror
         run: | 
