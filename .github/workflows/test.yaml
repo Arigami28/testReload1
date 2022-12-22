@@ -1,8 +1,11 @@
 name: Mirroring repo
 on:
-  push
+  push:
+    branches:
+      - main
 concurrency:
-  group: ${{ github.ref }}
+  group: environment-${{ github.ref }}
+  cancel-in-progress: true
 jobs:
   mirroring:
     if: github.repository == 'Arigami28/testReload1.git'
