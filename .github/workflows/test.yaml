@@ -5,7 +5,6 @@ on:
       - main
 concurrency:
   group: environment-${{ github.ref }}
-  cancel-in-progress: true
 jobs:
   mirroring:
     if: github.repository == 'Arigami28/testReload1'
@@ -24,5 +23,4 @@ jobs:
           TARGET_REPO_URL: 'git@github.com:Arigami28/testReload2.git'
         run: | 
           git remote add mirror $TARGET_REPO_URL && git push --progress --tags --force --prune mirror '+refs/remotes/origin/*:refs/heads/*'
-
 
