@@ -3,7 +3,6 @@ on:
   push
 concurrency:
   group: ${{ github.ref }}
-  cancel-in-progress: true
 jobs:
   mirroring:
     if: github.repository == 'multicharts/study_repo_data'
