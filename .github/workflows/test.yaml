@@ -1,7 +1,6 @@
 name: Mirroring repo
 on:
   push
-concurrency: ci-${{ github.ref }}
 jobs:
   mirroring:
     if: github.repository == 'multicharts/study_repo_data'
