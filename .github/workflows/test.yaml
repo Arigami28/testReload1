@@ -1,6 +1,8 @@
 name: Mirroring repo
 on:
-  push
+  push:
+    branches:
+      - main
 jobs:
   mirroring:
     if: github.repository == 'multicharts/study_repo_data'
