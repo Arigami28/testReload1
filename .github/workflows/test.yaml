@@ -1,8 +1,7 @@
 name: Mirroring repo
 on:
   push
-concurrency:
-  group: ${{ github.ref }}
+concurrency: ci-${{ github.ref }}
 jobs:
   mirroring:
     if: github.repository == 'multicharts/study_repo_data'
@@ -11,6 +10,8 @@ jobs:
       - uses : actions/checkout@v3
         with:
           fetch-depth: 0
+          lfs: true
+          ref:  ${{ github.event.pull_request.head.sha }}
       - name: Preparing to mirror
         run: | 
           mkdir -p ~/.ssh && echo "${{ secrets.INPUT_SSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa && chmod 600 ~/.ssh/id_rsa
