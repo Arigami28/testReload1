@@ -3,8 +3,7 @@ on:
   push:
     branches:
       - main
-concurrency:
-  group: environment-${{ github.ref }}
+concurrency: ${{ github.ref }}
 jobs:
   mirroring:
     if: github.repository == 'Arigami28/testReload1'
